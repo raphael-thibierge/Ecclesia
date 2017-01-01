@@ -47,9 +47,12 @@ class ImportAmendmentJob implements ShouldQueue
         $file->unzip();
 
         $file->update();
+        echo PHP_EOL . 'xml loaded' . PHP_EOL;
 
         // get xml file
         $xmlData = new SimpleXMLElement(storage_path($file->xmlPath()), null, true);
+        var_dump($xmlData);
+        echo PHP_EOL;
 
         // foreach vote
         foreach ($xmlData as $textXML) {
@@ -67,6 +70,7 @@ class ImportAmendmentJob implements ShouldQueue
             echo '.';
 
         }
+        echo PHP_EOL . 'Finished' . PHP_EOL;
     }
 
     private function getAmendmentAttribute($xmlData, $legislative_document_uid)
