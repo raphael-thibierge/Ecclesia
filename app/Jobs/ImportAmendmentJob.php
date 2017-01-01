@@ -47,10 +47,11 @@ class ImportAmendmentJob implements ShouldQueue
         $file->unzip();
 
         $file->update();
-        echo PHP_EOL . 'xml loaded' . PHP_EOL;
+        echo PHP_EOL . 'xml downloaded' . PHP_EOL;
 
         // get xml file
         $xmlData = new SimpleXMLElement(storage_path($file->xmlPath()), null, true);
+        echo PHP_EOL . 'xml loaded' . PHP_EOL;
         var_dump($xmlData);
         echo PHP_EOL;
 
