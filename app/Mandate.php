@@ -11,7 +11,8 @@ class Mandate extends Model
 
     public $incrementing = false;
 
-    protected $attributes = [
+    protected $fillable = [
+        'uid',
         'actor_uid',
         'organ_type',
         'start_date',

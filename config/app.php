@@ -176,7 +176,16 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        /**
+         * Manually added
+         */
+        // MongoDB
         Jenssegers\Mongodb\MongodbServiceProvider::class,
+        // ZIP
+        Chumper\Zipper\ZipperServiceProvider::class,
+        // XML Parser,
+        Orchestra\Parser\XmlServiceProvider::class,
+
 
     ],
 
@@ -227,6 +236,11 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
 
+        /**
+         *  Manually added
+         */
+        'Zipper' => Chumper\Zipper\Zipper::class,
+        'XmlParser' => Orchestra\Parser\Xml\Facade::class,
 
     ],
 

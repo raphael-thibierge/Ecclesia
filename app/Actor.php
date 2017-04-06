@@ -7,13 +7,16 @@ use Illuminate\Database\Eloquent\Model;
 class Actor extends Model
 {
 
+    protected $table = 'actors';
+
     protected $primaryKey = 'uid';
 
     public $incrementing = false;
 
-    protected $attributes = [
-        'firstname',
-        'lastname',
+    protected $fillable = [
+        'uid',
+        'first_name',
+        'last_name',
         'gender',
         'birth_date',
         'birth_department', // can be null
@@ -22,7 +25,7 @@ class Actor extends Model
     ];
 
     public function mandates(){
-        return $this->hasMany('\App\Actors');
+        return $this->hasMany('\App\Mandate');
     }
 
 }

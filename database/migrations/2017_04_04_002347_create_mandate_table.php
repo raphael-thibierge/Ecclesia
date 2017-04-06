@@ -17,6 +17,7 @@ class CreateMandateTable extends Migration
             $table->string('uid');
             $table->primary('uid');
             $table->string('actor_uid');
+            $table->string('organ_type')->nullable();
             $table->date('start_date');
             $table->date('end_date')->nullable();
             $table->date('taking_office_date')->nullable();

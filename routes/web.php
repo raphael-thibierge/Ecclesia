@@ -19,6 +19,11 @@ Route::resource('OpenDataFile', 'OpenDataFileController', ['except' => [
     'show'
 ]]);
 
+Route::resource('actor', 'ActorController', ['only' => [
+    'show', 'index',
+]]);
+
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
