@@ -13,7 +13,7 @@ class CreateMandateTable extends Migration
      */
     public function up()
     {
-        Schema::create('mandates', function (Blueprint $table) {
+        Schema::create('mandates', function ( $table) {
             $table->string('uid');
             $table->primary('uid');
             $table->string('actor_uid');
@@ -36,6 +36,6 @@ class CreateMandateTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('mandates');
+        Schema::drop('mandates');
     }
 }

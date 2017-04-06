@@ -8,14 +8,7 @@
 
 return [
 
-    'lastname' => 'Nom',
-    'firstname' => 'Prénom',
-    'email' => 'Adresse Email',
-    'login' => 'Connexion',
-    'register' => 'Inscription',
-    'password' => 'Mot de passe',
-    'confirm password' => 'Confirmer le mot de passe',
-
-
-
+    'actor' => 'Acteur',
+    'actors' => 'Acteurs',
+    'taking_office_date' => 'Date de prise de fonction'
 ];

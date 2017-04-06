@@ -8,9 +8,7 @@
 
 return [
 
-    'actor' => 'Actor',
-    'actor' => 'Actor',
-
+    'mandate' => 'Mandat',
 
 
 ];

@@ -8,7 +8,8 @@
 
 return [
 
-    'mandate' => 'Mandat',
-
-
+    'open_data_files' => 'Fichiers open-data',
+    'edit-file'          =>  'Modifier le fichier open-data',
+    'add-file'           =>  'Ajouter nouveau fichier open-data',
+    'no-file'           => 'Pas de fichier'
 ];

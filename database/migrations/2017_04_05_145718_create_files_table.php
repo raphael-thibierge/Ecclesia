@@ -13,9 +13,9 @@ class CreateFilesTable extends Migration
      */
     public function up()
     {
-        Schema::create('open_data_files', function (Blueprint $table){
+        Schema::create('open_data_files', function ($table){
 
-            $table->increments('id');
+            $table->increments('_id');
             $table->string('name');
             $table->string('url');
             $table->string('local_path')->nullable();
@@ -33,6 +33,6 @@ class CreateFilesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('open_data_files');
+        Schema::drop('open_data_files');
     }
 }

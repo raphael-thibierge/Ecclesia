@@ -11,23 +11,23 @@
                     </h1><h1>
                         {{ $actor->first_name }} {{ $actor->last_name }}
                     </h1>
-                    <p>Gender : {{ $actor->gender  }}</p>
-                    <p>Birth date : {{ $actor->birth_date  }}</p>
+                    <p>@lang('basics.gender') :  @lang('basics.' . $actor->gender)</p>
+                    <p>@lang('basics.birth_date') : {{ $actor->birth_date  }}</p>
 
                     @if ($actor->death_date != null)
-                        <p>Birth date : {{ $actor->death_date  }}</p>
+                        <p>@lang('basics.death_date') : {{ $actor->death_date  }}</p>
                     @endif
 
                     @if ($actor->birth_city != null)
-                        <p>Birth city : {{ $actor->birth_city  }}</p>
+                        <p>@lang('basics.birth_city') : {{ $actor->birth_city  }}</p>
                     @endif
 
                     @if ($actor->birth_department != null)
-                        <p>Birth department : {{ $actor->birth_department  }}</p>
+                        <p>@lang('basics.birth_department') : {{ $actor->birth_department  }}</p>
                     @endif
 
                     @if ($actor->birth_country != null)
-                        <p>Birth country : {{ $actor->birth_country  }}</p>
+                        <p>@lang('basics.birth_country') : {{ $actor->birth_country  }}</p>
                     @endif
 
                 </div>
@@ -44,19 +44,19 @@
 
 
                 <div class="panel panel-default">
-                    <div class="panel-heading" role="tab" id="headingOne">
+                    <div class="panel-heading" role="tab" id="heading{{ $mandate->id }}">
                         <h4 class="panel-title">
-                            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse{{ $mandate->id }}" aria-expanded="false" aria-controls="collapse{{ $mandate->id }}">
                                 {{ $mandate->quality }} {{ $mandate->organ_type }}
                             </a>
                         </h4>
                     </div>
-                    <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                    <div id="collapse{{ $mandate->id }}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading{{ $mandate->id }}">
                         <div class="panel-body">
 
-                            <p>Start date : {{ $mandate->start_date }} </p>
-                            <p>Taking Office Date : {{ $mandate->taking_office_date }} </p>
-                            <p>End date : {{ $mandate->start_date }} </p>
+                            <p>@lang('basics.start_date') : {{ $mandate->start_date }} </p>
+                            <p>@lang('actor.taking_office_date') : {{ $mandate->taking_office_date }} </p>
+                            <p>@lang('basics.end_date') : {{ $mandate->end_date }} </p>
 
                         </div>
                     </div>

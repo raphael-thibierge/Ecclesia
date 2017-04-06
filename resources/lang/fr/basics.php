@@ -8,8 +8,28 @@
 
 return [
 
-    'lastname' => 'Last name',
-    'firstname' => 'First name',
+    'email' => 'Adresse     Email',
+    'login' => 'Connexion',
+    'logout' => 'Déconnexion',
+    'register' => 'Inscription',
+    'password' => 'Mot de passe',
+    'confirm_password' => 'Confirmer le mot de passe',
+    'birth_date'    => 'Date de naissance',
+    'birth_department'    => 'Département de naissance',
+    'birth_country'    => 'Pays de naissance',
+    'birth_city'    => 'Ville de naissance',
+    'death_date'    => 'Date de mort',
+    'sex'   => 'Sexe',
+    'gender'    => 'Genre',
+    'male'  => 'Homme',
+    'female' => 'Femme',
+    'no_data'   => 'Pas de données',
+    'start_date' => 'Date de début',
+    'end_date' => 'Date de fin',
+    'description' => 'Description',
+    'delete' => 'Supprimer',
+    'edit'  => 'Modifier',
+    'add'   =>  'Ajouter'
 
 
 ];

@@ -8,9 +8,9 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         @if (isset ($file))
-                            Edit open data file
+                            @lang('open_data_file.edit-file')
                         @else
-                            New Open Data File
+                            @lang('open_data_file.add-file')
                         @endif
                     </div>
                     <div class="panel-body">
@@ -25,7 +25,7 @@
 
                             {{-- NAME--}}
                             <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                                <label for="name" class="col-md-4 control-label">Name</label>
+                                <label for="name" class="col-md-4 control-label">{{ ucfirst(__('validation.attributes.name')) }}</label>
 
                                 <div class="col-md-6">
                                     <input id="name" type="text" class="form-control" name="name" value="{{ isset($file) ? $file->name : old('name') }}" required autofocus>
@@ -55,7 +55,7 @@
 
                             {{-- Description --}}
                             <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
-                                <label for="description" class="col-md-4 control-label">Description</label>
+                                <label for="description" class="col-md-4 control-label">{{ ucfirst(__('validation.attributes.description')) }}</label>
 
                                 <div class="col-md-6">
                                     <input id="description" type="text" class="form-control" name="description" value="{{ isset($file) ? $file->description : old('description') }}" required>

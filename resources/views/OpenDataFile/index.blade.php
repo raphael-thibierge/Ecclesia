@@ -15,7 +15,7 @@
 
 
         <div class="page-header">
-            <h1>Open Data Files <small><a href="{{ route('OpenDataFile.create') }}" class="btn btn-success">New</a></small></h1>
+            <h1>@lang('open_data_file.open_data_files') <small><a href="{{ route('OpenDataFile.create') }}" class="btn btn-success">@lang('basics.add')</a></small></h1>
         </div>
 
 
@@ -26,8 +26,8 @@
 
 
                     <thead>
-                        <td>Name</td>
-                        <td>Description</td>
+                        <td>{{ ucfirst(__('validation.attributes.name')) }}</td>
+                        <td>{{ ucfirst(__('validation.attributes.description')) }}</td>
                         <td>URL</td>
                         <td></td>
                     </thead>
@@ -43,14 +43,14 @@
                             <td>
 
                                 <a href="{{ route('OpenDataFile.edit', ['OpenDataFile' => $file]) }}" class="btn btn-xs btn-default">
-                                    Edit
+                                    @lang('basics.edit')
                                 </a>
 
                                 <form action="{{ route('OpenDataFile.destroy', ['OpenDataFile' => $file]) }}" method="POST">
                                     {{ csrf_field() }}
                                     {{ method_field('DELETE') }}
                                     <button class="btn btn-xs btn-danger" type="submit">
-                                        Delete
+                                        @lang('basics.delete')
                                     </button>
                                 </form>
                             </td>
@@ -58,7 +58,7 @@
 
                     @empty
                         <tr class="warning">
-                            <td colspan="3" class="text-center">No file.</td>
+                            <td colspan="3" class="text-center">@lang('open_data_file.no-file')</td>
                         </tr>
 
                     @endforelse

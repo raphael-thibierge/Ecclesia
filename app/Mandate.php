@@ -3,9 +3,13 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Jenssegers\Mongodb\Eloquent\Model as MongoModel;
 
-class Mandate extends Model
+class Mandate extends MongoModel
 {
+
+    protected $table = 'mandates';
+    protected $collection = 'mandates';
 
     protected $primaryKey = 'uid';
 

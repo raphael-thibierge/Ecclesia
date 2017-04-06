@@ -3,11 +3,13 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
 
-class Actor extends Model
+class Actor extends Eloquent
 {
 
     protected $table = 'actors';
+    protected $collection = 'actors';
 
     protected $primaryKey = 'uid';
 

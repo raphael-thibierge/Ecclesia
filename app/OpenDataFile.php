@@ -8,6 +8,7 @@ use Chumper\Zipper\Facades\Zipper;
 use Illuminate\Database\Eloquent\Model;
 use SimpleXMLElement;
 use Orchestra\Parser\Xml\Facade as XmlParser;
+use Jenssegers\Mongodb\Eloquent\Model as MongoModel;
 
 
 /**
@@ -15,16 +16,21 @@ use Orchestra\Parser\Xml\Facade as XmlParser;
  * @property string local_path
  * @property mixed file_name
  */
-class OpenDataFile extends Model
+class OpenDataFile extends MongoModel
 {
+
+    protected $connection = 'mongodb';
 
     const ZIP_PATH = 'OpenData/zip/';
     const XML_PATH = 'OpenData/xml/';
 
 
     protected $table = 'open_data_files';
+    protected $collection = 'open_data_files';
 
-    protected $primaryKey = 'id';
+
+    protected $primaryKey = '_id';
+
 
 
     protected $fillable = ['name', 'url', 'description', 'file_name'];

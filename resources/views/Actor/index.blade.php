@@ -15,7 +15,7 @@
 
 
         <div class="page-header">
-            <h1>Actors</h1>
+            <h1>@lang('actor.actor')</h1>
         </div>
 
 
@@ -25,11 +25,11 @@
                 <table class="table table-bordered table-hover">
 
                     <thead>
-                        <td>First name</td>
-                        <td>Last name</td>
-                        <td>Sec</td>
-                        <td>Birth date</td>
-                        <td>Death date</td>
+                        <td>{{ucfirst(__('validation.attributes.first_name'))}}</td>
+                        <td>{{ucfirst(__('validation.attributes.last_name'))}}</td>
+                        <td>@lang('basics.gender')</td>
+                        <td>@lang('basics.birth_date')</td>
+                        <td>@lang('basics.death_date')</td>
                     </thead>
 
                     <tbody>
@@ -43,14 +43,14 @@
                                     {{ $actor->last_name }}
                                 </a>
                             </td>
-                            <td>{{ $actor->gender }}</td>
+                            <td>@lang('basics.' . $actor->gender)</td>
                             <td>{{ $actor->birth_date }}</td>
                             <td>{{ $actor->death_date }}</td>
                         </tr>
 
                     @empty
                         <tr class="danger">
-                            <td colspan="3" class="text-center">No actor.</td>
+                            <td colspan="5" class="text-center">@lang('basics.no_data')</td>
                         </tr>
 
                     @endforelse

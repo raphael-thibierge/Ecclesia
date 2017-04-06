@@ -8,7 +8,9 @@
 
 return [
 
-    'remember_me' => 'Se souvenir de moi',
-    'forgot_password' => 'Mot de passe oublié ?'
+    'remember_me' => 'Remember me',
+    'forgot_password' => 'Forgot Your Password?',
+    'send_reset_password' => 'Send Password Reset Link',
+    'reset_password'    => 'Reset Password',
 
 ];
