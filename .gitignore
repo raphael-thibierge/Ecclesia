@@ -8,5 +8,5 @@
 Homestead.json
 Homestead.yaml
 .env
-/storage/OpenData/xml/*
-/storage/OpenData/zip/*
+storage/OpenData/zip/
+storage/OpenData/xml/
