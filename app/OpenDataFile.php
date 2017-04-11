@@ -4,6 +4,7 @@ namespace App;
 
 
 use App\Jobs\ImportActorsAndMandatesJob;
+use App\Jobs\ImportVoteJob;
 use Chumper\Zipper\Facades\Zipper;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
@@ -83,6 +84,7 @@ class OpenDataFile extends MongoModel
     public static function importJobList(): Collection{
         return collect([
             'ImportActorsAndMandatesJob' => ImportActorsAndMandatesJob::class,
+            'ImportVoteJob'              => ImportVoteJob::class,
         ]);
     }
 

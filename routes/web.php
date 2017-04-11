@@ -28,6 +28,10 @@ Route::resource('actor', 'ActorController', ['only' => [
     'show', 'index',
 ]]);
 
+Route::resource('vote', 'VoteController', ['only' => [
+    'show', 'index',
+]]);
+
 
 Auth::routes();
 

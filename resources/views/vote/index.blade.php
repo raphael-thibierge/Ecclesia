@@ -15,20 +15,19 @@
 
 
         <div class="page-header">
-            <h1>@lang('actor.actors')</h1>
+            <h1>Scrutins</h1>
         </div>
 
 
         <div class="row">
             <div class="col-xs-12">
 
-                {{ $actors->links() }}
+                {{ $votes->links() }}
 
                 <div class="list-group">
-                    @forelse($actors as $actor)
-                        <a class="list-group-item" href="{{ route('actor.show', ['actor' => $actor]) }}">
-                            <span class="text-uppercase">{{ $actor->last_name }}</span>
-                            <span>{{ $actor->first_name }}</span>
+                    @forelse($votes as $vote)
+                        <a class="list-group-item" href="{{ route('vote.show', ['vote' => $vote]) }}">
+                            {{ ucfirst($vote->description) }}
                         </a>
 
                     @empty
@@ -38,6 +37,7 @@
 
                     @endforelse
                 </div>
+
 
             </div>
         </div>

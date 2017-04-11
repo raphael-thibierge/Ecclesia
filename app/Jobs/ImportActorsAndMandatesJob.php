@@ -5,6 +5,7 @@ namespace App\Jobs;
 use App\Actor;
 use App\Mandate;
 use App\OpenDataFile;
+use App\Services\Utils;
 use Illuminate\Bus\Queueable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
@@ -56,7 +57,7 @@ class ImportActorsAndMandatesJob implements ShouldQueue
 
             $actorXML = $acteurElement;
 
-            $actorId = self::formatString($actorXML->uid);
+            $actorId = Utils::formatString($actorXML->uid);
 
             $etatCivil = $actorXML->etatCivil;
             $ident = $etatCivil->ident;
@@ -65,14 +66,14 @@ class ImportActorsAndMandatesJob implements ShouldQueue
             // define attributes array
             $attributes = [
                 'uid'                => $actorId,
-                'first_name'         => self::formatString($ident->prenom),
-                'last_name'          => self::formatString($ident->nom),
+                'first_name'         => Utils::formatString($ident->prenom),
+                'last_name'          => Utils::formatString($ident->nom),
                 'gender'            => $ident->civ->__toString() == 'M.' ? 'male' : 'female',
-                'birth_date'        => self::formatString($birthInfos->dateNais),
-                'birth_city'        => self::formatString($birthInfos->villeNais), // can be null
-                'birth_department'  => self::formatString($birthInfos->depNais), // can be null
-                'birth_country'     => self::formatString($birthInfos->paysNais), // can be null
-                'death_date'        => self::formatString($etatCivil->dateDeces), // can be null
+                'birth_date'        => Utils::formatString($birthInfos->dateNais),
+                'birth_city'        => Utils::formatString($birthInfos->villeNais), // can be null
+                'birth_department'  => Utils::formatString($birthInfos->depNais), // can be null
+                'birth_country'     => Utils::formatString($birthInfos->paysNais), // can be null
+                'death_date'        => Utils::formatString($etatCivil->dateDeces), // can be null
             ];
 
 
@@ -95,18 +96,18 @@ class ImportActorsAndMandatesJob implements ShouldQueue
 
                 $mandateXML = $mandateElement;
 
-                $mandateId = self::formatString($mandateXML->uid);
+                $mandateId = Utils::formatString($mandateXML->uid);
 
 
                 // define attributes
                 $attributes = [
                     'uid'                   => $mandateId,
                     'actor_uid'             => $actorId,
-                    'organ_type'            => self::formatString($mandateXML->typeOrgane),
-                    'start_date'            => self::formatString($mandateXML->dateDebut),
-                    'end_date'              => self::formatString($mandateXML->dateFin),// can be null
-                    'taking_office_date'    => self::formatString($mandateXML->mandature->datePriseFonction),// can be null
-                    'quality'               => self::formatString($mandateXML->infosQualite->codeQualite), // can be null
+                    'organ_type'            => Utils::formatString($mandateXML->typeOrgane),
+                    'start_date'            => Utils::formatString($mandateXML->dateDebut),
+                    'end_date'              => Utils::formatString($mandateXML->dateFin),// can be null
+                    'taking_office_date'    => Utils::formatString($mandateXML->mandature->datePriseFonction),// can be null
+                    'quality'               => Utils::formatString($mandateXML->infosQualite->codeQualite), // can be null
                 ];
 
                 // if mandate exist in database
@@ -129,12 +130,5 @@ class ImportActorsAndMandatesJob implements ShouldQueue
     }
 
 
-    static private function formatString($element){
 
-        if ($element == null){
-            return null;
-        }
-        $string = $element->__toString();
-        return $string != null ? $string : null;
-    }
 }
