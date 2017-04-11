@@ -18,6 +18,11 @@ Route::get('/', function () {
 Route::resource('OpenDataFile', 'OpenDataFileController', ['except' => [
     'show'
 ]]);
+Route::group(['prefix' => 'OpenDataFile/{OpenDataFile}/'], function (){
+
+    Route::get('/execute', 'OpenDataFileController@execute')->name('OpenDataFile.execute');
+
+});
 
 Route::resource('actor', 'ActorController', ['only' => [
     'show', 'index',
@@ -27,3 +32,10 @@ Route::resource('actor', 'ActorController', ['only' => [
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
+
+
+Route::group(['prefix' => 'admin'], function (){
+
+    Route::get('/', 'AdminController@show')->name('admin.show');
+
+});

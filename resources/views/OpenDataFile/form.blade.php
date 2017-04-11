@@ -67,8 +67,35 @@
                                     @endif
                                 </div>
                             </div>
+                                
+                                
+                            {{-- Import Script --}}
+                            <div class="form-group{{ $errors->has('import_script') ? ' has-error' : '' }}">
+                                <label for="import_script" class="col-md-4 control-label">{{ ucfirst(__('open_data_file.import_script')) }}</label>
 
-                            <div class="form-group">
+                                <div class="col-md-6">
+
+                                    <select name="import_script" id="import_script" class="form-control" required>
+                                        <option value="null">...</option>
+                                        <?php $value = isset($file) ? $file->import_script : old('import_script'); ?>
+                                        @foreach(\App\OpenDataFile::importJobList()->keys() as $jobList)
+                                            <option value="{{ $jobList }}" {{ $value == $jobList ? 'selected' : '' }}>
+                                                {{ $jobList }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+
+                                    @if ($errors->has('import_script'))
+                                        <span class="help-block">
+                                                <strong>{{ $errors->first('import_script') }}</strong>
+                                            </span>
+                                    @endif
+                                </div>
+                            </div>
+
+
+
+                                <div class="form-group">
                                 <div class="col-md-6 col-md-offset-4">
                                     <button type="submit" class="btn btn-primary">
                                         @if (isset ($file))

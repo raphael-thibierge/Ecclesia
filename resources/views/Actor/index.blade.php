@@ -15,7 +15,7 @@
 
 
         <div class="page-header">
-            <h1>@lang('actor.actor')</h1>
+            <h1>@lang('actor.actors')</h1>
         </div>
 
 

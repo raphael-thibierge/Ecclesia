@@ -28,7 +28,7 @@
                     <thead>
                         <td>{{ ucfirst(__('validation.attributes.name')) }}</td>
                         <td>{{ ucfirst(__('validation.attributes.description')) }}</td>
-                        <td>URL</td>
+                        <td>@lang('open_data_file.import_script')</td>
                         <td></td>
                     </thead>
 
@@ -39,11 +39,15 @@
                         <tr>
                             <td>{{ $file->name }}</td>
                             <td>{{ $file->description }}</td>
-                            <td>{{ $file->url }}</td>
+                            <td>{{ $file->import_script }}</td>
                             <td>
 
                                 <a href="{{ route('OpenDataFile.edit', ['OpenDataFile' => $file]) }}" class="btn btn-xs btn-default">
                                     @lang('basics.edit')
+                                </a>
+
+                                <a href="{{ route('OpenDataFile.execute', ['OpenDataFile' => $file]) }}" class="btn btn-xs btn-warning">
+                                    @lang('basics.execute')
                                 </a>
 
                                 <form action="{{ route('OpenDataFile.destroy', ['OpenDataFile' => $file]) }}" method="POST">

@@ -6,6 +6,7 @@ namespace App;
 use App\Jobs\ImportActorsAndMandatesJob;
 use Chumper\Zipper\Facades\Zipper;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Collection;
 use SimpleXMLElement;
 use Orchestra\Parser\Xml\Facade as XmlParser;
 use Jenssegers\Mongodb\Eloquent\Model as MongoModel;
@@ -15,6 +16,7 @@ use Jenssegers\Mongodb\Eloquent\Model as MongoModel;
  * @property string url
  * @property string local_path
  * @property mixed file_name
+ * @property mixed import_script
  */
 class OpenDataFile extends MongoModel
 {
@@ -33,7 +35,15 @@ class OpenDataFile extends MongoModel
 
 
 
-    protected $fillable = ['name', 'url', 'description', 'file_name'];
+    protected $fillable = [
+        'name',
+        'url',
+        'description',
+        'file_name',
+        'import_script',
+    ];
+
+
 
 
     public function download(){
@@ -68,9 +78,19 @@ class OpenDataFile extends MongoModel
 
         $job = new ImportActorsAndMandatesJob($this);
         $job->handle();
-
     }
 
+    public static function importJobList(): Collection{
+        return collect([
+            'ImportActorsAndMandatesJob' => ImportActorsAndMandatesJob::class,
+        ]);
+    }
+
+    public function newJob(){
+        $jobClass = self::importJobList()->get($this->import_script);
+        $job =  new $jobClass($this);
+        dispatch($job->onQueue('import_script'));
+    }
 
 
 }

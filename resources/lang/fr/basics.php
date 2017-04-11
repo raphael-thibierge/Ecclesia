@@ -29,7 +29,8 @@ return [
     'description' => 'Description',
     'delete' => 'Supprimer',
     'edit'  => 'Modifier',
-    'add'   =>  'Ajouter'
+    'add'   =>  'Ajouter',
+    'execute'   =>  'Executer',
 
 
 ];

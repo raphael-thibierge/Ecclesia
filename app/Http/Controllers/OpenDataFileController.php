@@ -8,6 +8,12 @@ use Illuminate\Http\Request;
 
 class OpenDataFileController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('admin');
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -34,81 +40,74 @@ class OpenDataFileController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param OpenDataFileRequest|Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(OpenDataFileRequest $request)
     {
-
-        $attributes = [
-            'name'  => $request->get('name'),
-            'url'  => $request->get('url'),
-            'description'  => $request->get('description')
-        ];
-
-        OpenDataFile::create($attributes);
-
+        OpenDataFile::create($request->getAttributes());
         return redirect()->route('OpenDataFile.index')->with('success', 'New pen data file added !');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\OpenDataFile  $openDataFile
+     * @param OpenDataFile $OpenDataFile
      * @return \Illuminate\Http\Response
+     * @internal param OpenDataFile $openDataFile
      */
-    public function show(OpenDataFile $openDataFile)
+    public function show(OpenDataFile $OpenDataFile)
     {
-        die('euh');
+        // excepted in route file
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\OpenDataFile  $openDataFile
+     * @param OpenDataFile $OpenDataFile
      * @return \Illuminate\Http\Response
+     * @internal param $id
+     * @internal param OpenDataFile $openDataFile
      */
-    public function edit($id)
+    public function edit(OpenDataFile $OpenDataFile)
     {
-        $file = OpenDataFile::findOrFail($id);
-
         return view('OpenDataFile.form', [
-            "file" => $file
+            "file" => $OpenDataFile
         ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\OpenDataFile  $openDataFile
+     * @param OpenDataFileRequest|Request $request
+     * @param OpenDataFile $OpenDataFile
      * @return \Illuminate\Http\Response
+     * @internal param $id
+     * @internal param OpenDataFile $openDataFile
      */
-    public function update(OpenDataFileRequest $request, $id)
+    public function update(OpenDataFileRequest $request, OpenDataFile $OpenDataFile)
     {
-
-        $attributes = [
-            'name'  => $request->get('name'),
-            'url'  => $request->get('url'),
-            'description'  => $request->get('description')
-        ];
-
-        $file = OpenDataFile::findOrFail($id);
-        $file->update($attributes);
-
+        $OpenDataFile->update($request->getAttributes());
         return redirect()->route('OpenDataFile.index')->with('success', 'Open data file updated !');
-
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\OpenDataFile  $openDataFile
+     * @param $id
      * @return \Illuminate\Http\Response
+     * @internal param OpenDataFile $openDataFile
      */
     public function destroy($id)
     {
         OpenDataFile::destroy($id);
         return redirect()->route('OpenDataFile.index')->with('success', 'Open data file deleted !');
     }
+
+    public function execute(OpenDataFile $OpenDataFile){
+        $OpenDataFile->newJob();
+        return redirect()->route('OpenDataFile.index')->with('success', 'Open data file will be imported as soon as possible !');
+    }
+
+
 }

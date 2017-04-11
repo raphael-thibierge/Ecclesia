@@ -11,6 +11,16 @@
                     You are logged in!
                 </div>
             </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">Dashboard</div>
+
+                <div class="panel-body">
+                    <a href="{{ route('actor.index') }}">@lang('actor.actors')</a>
+                </div>
+            </div>
+
+
         </div>
     </div>
 </div>
