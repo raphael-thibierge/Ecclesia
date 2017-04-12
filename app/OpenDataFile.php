@@ -4,6 +4,7 @@ namespace App;
 
 
 use App\Jobs\ImportActorsAndMandatesJob;
+use App\Jobs\ImportLegislativeFoldersJob;
 use App\Jobs\ImportVotesJob;
 use Chumper\Zipper\Facades\Zipper;
 use Illuminate\Database\Eloquent\Model;
@@ -18,6 +19,7 @@ use Jenssegers\Mongodb\Eloquent\Model as MongoModel;
  * @property string local_path
  * @property mixed file_name
  * @property mixed import_script
+ * @property mixed id
  */
 class OpenDataFile extends MongoModel
 {
@@ -81,8 +83,9 @@ class OpenDataFile extends MongoModel
 
     public static function importJobList(): Collection{
         return collect([
-            'ImportActorsAndMandatesJob' => ImportActorsAndMandatesJob::class,
-            'ImportVotesJob'              => ImportVotesJob::class,
+            'ImportActorsAndMandatesJob'    => ImportActorsAndMandatesJob::class,
+            'ImportVotesJob'                => ImportVotesJob::class,
+            'ImportLegislativeFoldersJob'   => ImportLegislativeFoldersJob::class,
         ]);
     }
 

@@ -59,7 +59,7 @@
 
         <div class="row">
             <div class="col-xs-12">
-                <h2>Mandates</h2>
+                <h2>Mandats</h2>
             </div>
         </div>
 
@@ -82,7 +82,7 @@
 
                 dataTable.addRows([
                     @foreach($actor->mandates as $mandate)
-                    [ "{!! (str_replace("\n", '', $mandate->organ->title)) !!}", "{{ ucfirst($mandate->quality) }}", new Date("{{ $mandate->start_date }}"), new Date("{{ $mandate->end_date != null ? $mandate->end_date  : \Carbon\Carbon::today()}}") ],
+                    [ "{!! ucfirst(str_replace("\n", '', $mandate->organ->title)) !!}", "{{ ucfirst($mandate->quality) }}", new Date("{{ $mandate->start_date }}"), new Date("{{ $mandate->end_date != null ? $mandate->end_date  : \Carbon\Carbon::today()}}") ],
                     @endforeach
                 ]);
 
@@ -91,6 +91,32 @@
         </script>
 
         <div id="mandate-timeline" style="height: 500px;"></div>
+
+        <div class="row">
+            <div class="col-xs-12">
+                <h2>Documents législatifs</h2>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="list-group">
+                    @forelse($actor->legislative_documents as $legislative_document)
+                        <div class="list-group-item">
+                            <h4 class="list-group-item-heading">
+                                {{  ucfirst($legislative_document->title) }}
+                            </h4>
+                            @if ($legislative_document->adoptionStatus != null)
+                                <p class="list-group-item-text">{{ ucfirst($legislative_document->adoptionStatus) }}</p>
+                            @endif
+                        </div>
+                    @empty
+                        <div class="list-group-item list-group-item-info">Pas de vote</div>
+                    @endforelse
+
+                </div>
+            </div>
+        </div>
 
     </div>
 @endsection

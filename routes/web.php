@@ -32,6 +32,10 @@ Route::resource('vote', 'VoteController', ['only' => [
     'show', 'index',
 ]]);
 
+Route::resource('legislativeFolder', 'LegislativeFolderController', ['only' => [
+    'show', 'index',
+]]);
+
 
 Auth::routes();
 

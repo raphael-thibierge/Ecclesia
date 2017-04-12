@@ -26,6 +26,7 @@ class Actor extends Eloquent
         'birth_department', // can be null
         'birth_country', // can be null
         'death_date', // can be null
+        'legislative_document_uids'
     ];
 
     public function mandates(){
@@ -35,6 +36,10 @@ class Actor extends Eloquent
 
     public function ballots(){
         return $this->hasMany('App\Ballot');
+    }
+
+    public function legislative_documents(){
+        return $this->belongsToMany('App\LegislativeDocument', null, 'legislative_documents_uids', 'author_actor_uids' );
     }
 
 }

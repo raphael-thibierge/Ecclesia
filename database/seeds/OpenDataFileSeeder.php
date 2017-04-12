@@ -27,5 +27,19 @@ class OpenDataFileSeeder extends Seeder
             'import_script' => 'ImportVotesJob',
         ]);
 
+        OpenDataFile::create([
+            'name'          => 'Amendements',
+            'description'   => 'Tous les amendements publiés durant la législature groupés par texte de loi',
+            'url'           => 'http://data.assemblee-nationale.fr/static/openData/repository/LOI/amendements_legis/Amendements_XIV.xml.zip',
+            'import_script' => 'ImportAmendmentJob',
+        ]);
+
+        OpenDataFile::create([
+            'name'          => 'Travaux parlementaires',
+            'description'   => 'Dossiers législatifs de la 14ème législature et notices des textes associés',
+            'url'           => 'http://data.assemblee-nationale.fr/static/openData/repository/LOI/dossiers_legislatifs/Dossiers_Legislatifs_XIV.xml.zip',
+            'import_script' => 'ImportLegislativeFoldersJob',
+        ]);
+
     }
 }
