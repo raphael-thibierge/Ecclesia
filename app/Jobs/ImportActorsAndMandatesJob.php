@@ -5,6 +5,7 @@ namespace App\Jobs;
 use App\Actor;
 use App\Mandate;
 use App\OpenDataFile;
+use App\Organ;
 use App\Services\Utils;
 use Illuminate\Bus\Queueable;
 use Illuminate\Queue\SerializesModels;
@@ -48,6 +49,25 @@ class ImportActorsAndMandatesJob implements ShouldQueue
 
         // get xml file
         $xml = new SimpleXMLElement(storage_path($file->xmlPath()), null, true);
+
+
+
+
+
+
+        $organs = $xml->organes;
+
+        foreach ($organs->organe as $organ){
+
+            $organAttributes = $this->getOrganAttributes($organ);
+
+            $this->updateOrCreateOrgan($organAttributes);
+
+            echo '.';
+        }
+
+        echo PHP_EOL . 'actors' . PHP_EOL;
+
 
         // get actors
         $actors = $xml->acteurs;
@@ -104,6 +124,7 @@ class ImportActorsAndMandatesJob implements ShouldQueue
                     'uid'                   => $mandateId,
                     'actor_uid'             => $actorId,
                     'organ_type'            => Utils::formatString($mandateXML->typeOrgane),
+                    'organ_uid'            => Utils::formatString($mandateXML->organes->organeRef),
                     'start_date'            => Utils::formatString($mandateXML->dateDebut),
                     'end_date'              => Utils::formatString($mandateXML->dateFin),// can be null
                     'taking_office_date'    => Utils::formatString($mandateXML->mandature->datePriseFonction),// can be null
@@ -129,6 +150,30 @@ class ImportActorsAndMandatesJob implements ShouldQueue
 
     }
 
+    private function getOrganAttributes($organ) : array
+    {
+        return [
+            'uid'       => Utils::formatString($organ->uid),
+            'type'       => Utils::formatString($organ->codeType),
+            'title'       => Utils::formatString($organ->libelle),
+            'short_title'       => Utils::formatString($organ->libelleAbrege),
+            'edition_title'       => Utils::formatString($organ->libelleEdition),
+        ];
+    }
+
+    private function updateOrCreateOrgan(array $organAttributes)
+    {
+        // if organ exist in database
+        if (($organ = Organ::find($organAttributes['uid'])) != null){
+            // update attributes
+            $organ->update($organAttributes);
+        }
+        // else
+        else {
+            // create actor
+            Organ::create($organAttributes);
+        }
+    }
 
 
 }

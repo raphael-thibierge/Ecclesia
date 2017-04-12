@@ -15,6 +15,8 @@ class Vote extends Model
 
     public $incrementing = false;
 
+    protected $dates = ['date'];
+
     protected $fillable = [
         'uid',
         'number',

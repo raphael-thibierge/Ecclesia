@@ -15,6 +15,8 @@ class Actor extends Eloquent
 
     public $incrementing = false;
 
+    protected $dates = ['birth_date', 'death_date'];
+
     protected $fillable = [
         'uid',
         'first_name',
@@ -28,6 +30,11 @@ class Actor extends Eloquent
 
     public function mandates(){
         return $this->hasMany('\App\Mandate');
+    }
+
+
+    public function ballots(){
+        return $this->hasMany('App\Ballot');
     }
 
 }

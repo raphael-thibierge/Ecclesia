@@ -28,9 +28,7 @@ class OpenDataFile extends MongoModel
     const XML_PATH = 'OpenData/xml/';
 
 
-    protected $table = 'open_data_files';
     protected $collection = 'open_data_files';
-
 
     protected $primaryKey = '_id';
 
@@ -93,6 +91,4 @@ class OpenDataFile extends MongoModel
         $job =  new $jobClass($this);
         dispatch($job->onQueue('import_script'));
     }
-
-
 }

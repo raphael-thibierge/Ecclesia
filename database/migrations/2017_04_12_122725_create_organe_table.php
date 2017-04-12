@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateVoteTable extends Migration
+class CreateOrganeTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateVoteTable extends Migration
      */
     public function up()
     {
-        Schema::create('votes', function ($table){
+        Schema::create('organs', function ($table){
             $table->timestamps();
         });
     }
@@ -25,6 +25,6 @@ class CreateVoteTable extends Migration
      */
     public function down()
     {
-        Schema::drop('votes');
+        Schema::drop('organs');
     }
 }

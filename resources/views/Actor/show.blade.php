@@ -35,47 +35,60 @@
         </div>
 
 
-
-        @forelse($actor->mandates as $mandate)
-
-            @if ($loop->first)
-                <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-            @endif
-
-
-                <div class="panel panel-default">
-                    <div class="panel-heading" role="tab" id="heading{{ $mandate->id }}">
-                        <h4 class="panel-title">
-                            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse{{ $mandate->id }}" aria-expanded="false" aria-controls="collapse{{ $mandate->id }}">
-                                {{ $mandate->quality }} {{ $mandate->organ_type }}
-                            </a>
-                        </h4>
-                    </div>
-                    <div id="collapse{{ $mandate->id }}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading{{ $mandate->id }}">
-                        <div class="panel-body">
-
-                            <p>@lang('basics.start_date') : {{ $mandate->start_date }} </p>
-                            <p>@lang('actor.taking_office_date') : {{ $mandate->taking_office_date }} </p>
-                            <p>@lang('basics.end_date') : {{ $mandate->end_date }} </p>
-
-                        </div>
-                    </div>
-                </div>
-
-
-            @if($loop->last)
-                </div>
-            @endif
-        @empty
-            <div class="alert alert-info">
-                No mandate for this actor.
+        <div class="row">
+            <div class="col-xs-12">
+                <h2>Derniers votes</h2>
             </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="list-group">
+                    @foreach($actor->ballots as $ballot)
+                        <div class="list-group-item list-group-item-{{ $ballot->decision == 'pour' ? 'success' : ($ballot->decision == 'contre' ? 'danger' : 'warning')  }}">
+                            {{ $ballot->vote->date->format('d-m-Y')}} : {{ $ballot->decision}} : {{ $ballot->vote->title}}
+                        </div>
+                    @endforeach
+
+                </div>
+            </div>
+        </div>
 
 
-        @endforelse
+        <div class="row">
+            <div class="col-xs-12">
+                <h2>Mandates</h2>
+            </div>
+        </div>
 
 
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
+        <script type="text/javascript">
+            google.charts.load("current", {packages:["timeline"]});
+            google.charts.setOnLoadCallback(drawChart);
+            function drawChart() {
+
+                var container = document.getElementById('mandate-timeline');
+                var chart = new google.visualization.Timeline(container);
+                var dataTable = new google.visualization.DataTable();
+                dataTable.addColumn({ type: 'string', id: 'Position' });
+                dataTable.addColumn({ type: 'string', id: 'Name' });
+                dataTable.addColumn({ type: 'date', id: 'Start' });
+                dataTable.addColumn({ type: 'date', id: 'End' });
+
+
+                dataTable.addRows([
+                    @foreach($actor->mandates as $mandate)
+                    [ "{!! (str_replace("\n", '', $mandate->organ->title)) !!}", "{{ ucfirst($mandate->quality) }}", new Date("{{ $mandate->start_date }}"), new Date("{{ $mandate->end_date != null ? $mandate->end_date  : \Carbon\Carbon::today()}}") ],
+                    @endforeach
+                ]);
+
+                chart.draw(dataTable);
+            }
+        </script>
+
+        <div id="mandate-timeline" style="height: 500px;"></div>
 
     </div>
 @endsection

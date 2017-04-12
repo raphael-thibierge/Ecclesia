@@ -2,6 +2,7 @@
 
     namespace App\Jobs;
 
+use App\Ballot;
 use App\OpenDataFile;
 use App\Services\Utils;
 use App\Vote;
@@ -47,19 +48,54 @@ class ImportVoteJob implements ShouldQueue
         // get xml file
         $xml = new SimpleXMLElement(storage_path($file->xmlPath()), null, true);
 
+        $cpt = 0;
         // foreach vote
         foreach ($xml->scrutin as $scrutinElement) {
-
 
             $voteXML = $scrutinElement;
 
             $attributes = $this->getVoteAttribute($voteXML);
 
             $this->findVoteOrCreate($attributes);
-            
-            // get ballots
-            //$ballots = $voteXML->miseAuPoint;
 
+
+            // get ballots
+            $ballots = $voteXML->miseAuPoint;
+
+            if (!empty($ballots->nonVotants)){
+                foreach ($ballots->nonVotants->votant as $voter){
+                    $ballotAttributes = $this->getBallotAttributes($attributes['uid'], 'nonVotant', $voter );
+                    $this->updateBallotOrCreate($ballotAttributes);
+                }
+            }
+
+            if (!empty($ballots->pours)) {
+                foreach ($ballots->pours->votant as $voter) {
+                    $ballotAttributes = $this->getBallotAttributes($attributes['uid'], 'pour', $voter);
+                    $this->updateBallotOrCreate($ballotAttributes);
+                }
+            }
+
+            if (!empty($ballots->contres)) {
+                foreach ($ballots->contres->votant as $voter) {
+                    $ballotAttributes = $this->getBallotAttributes($attributes['uid'], 'contre', $voter);
+                    $this->updateBallotOrCreate($ballotAttributes);
+                }
+            }
+
+            if (!empty($ballots->abstentions)) {
+                foreach ($ballots->abstentions->votant as $voter) {
+                    $ballotAttributes = $this->getBallotAttributes($attributes['uid'], 'abstention', $voter);
+                    $this->updateBallotOrCreate($ballotAttributes);
+                }
+            }
+
+            if (!empty($ballots->nonVotantsVolontaires)) {
+                foreach ($ballots->nonVotantsVolontaires->votant as $voter) {
+                    $ballotAttributes = $this->getBallotAttributes($attributes['uid'], 'nonVotantVolontaire', $voter);
+                    $this->updateBallotOrCreate($ballotAttributes);
+                }
+            }
 
             echo '.';
 
@@ -106,12 +142,23 @@ class ImportVoteJob implements ShouldQueue
 
 
     public function getBallotAttributes($voteId, $ballotDecision, $voter){
-        $attributes = [
+        return [
             'vote_uid'      => $voteId,
             'actor_uid'     => Utils::formatString($voter->acteurRef),
             'mandate_uid'   => Utils::formatString($voter->mandatRef),
             'decision'      => $ballotDecision,
         ];
+    }
+
+    public function updateBallotOrCreate($attributes){
+        $ballot = Ballot::where('vote_uid', $attributes['vote_uid'])
+                        ->where('actor_uid', $attributes['actor_uid'])
+                        ->first();
+        if ($ballot != null){
+            $ballot->update($attributes);
+        } else {
+            Ballot::create($attributes);
+        }
     }
 
 

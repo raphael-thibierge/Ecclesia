@@ -15,10 +15,13 @@ class Mandate extends MongoModel
 
     public $incrementing = false;
 
+    protected $dates = ['start_date', 'end_date', 'taking_office_date'];
+
     protected $fillable = [
         'uid',
         'actor_uid',
         'organ_type',
+        'organ_uid',
         'start_date',
         'end_date', // can be null
         'taking_office_date', // can be null
@@ -30,4 +33,8 @@ class Mandate extends MongoModel
         return $this->belongsTo('App\Actor');
     }
 
+
+    public function organ(){
+        return $this->belongsTo('App\Organ', 'organ_uid', 'uid');
+    }
 }
