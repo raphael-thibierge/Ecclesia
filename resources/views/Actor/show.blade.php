@@ -12,10 +12,10 @@
                         {{ $actor->first_name }} {{ $actor->last_name }}
                     </h1>
                     <p>@lang('basics.gender') :  @lang('basics.' . $actor->gender)</p>
-                    <p>@lang('basics.birth_date') : {{ $actor->birth_date  }}</p>
+                    <p>@lang('basics.birth_date') : {{ $actor->birth_date->format('d-m-Y')  }}</p>
 
                     @if ($actor->death_date != null)
-                        <p>@lang('basics.death_date') : {{ $actor->death_date  }}</p>
+                        <p>@lang('basics.death_date') : {{ $actor->death_date->format('d-m-Y')  }}</p>
                     @endif
 
                     @if ($actor->birth_city != null)
@@ -44,11 +44,13 @@
         <div class="row">
             <div class="col-xs-12">
                 <div class="list-group">
-                    @foreach($actor->ballots as $ballot)
+                    @forelse($actor->ballots as $ballot)
                         <div class="list-group-item list-group-item-{{ $ballot->decision == 'pour' ? 'success' : ($ballot->decision == 'contre' ? 'danger' : 'warning')  }}">
                             {{ $ballot->vote->date->format('d-m-Y')}} : {{ $ballot->decision}} : {{ $ballot->vote->title}}
                         </div>
-                    @endforeach
+                    @empty
+                        <div class="list-group-item list-group-item-info">Pas de vote</div>
+                    @endforelse
 
                 </div>
             </div>

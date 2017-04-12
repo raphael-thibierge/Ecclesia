@@ -33,7 +33,7 @@
 
                     @empty
                         <div class="list-group-item list-group-item-danger">
-                            Pas de scrutins...
+                            Pas d'acteur...
                         </div>
 
                     @endforelse

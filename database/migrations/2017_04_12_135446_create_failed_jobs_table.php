@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateJobsTable extends Migration
+class CreateFailedJobsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,13 @@ class CreateJobsTable extends Migration
      */
     public function up()
     {
-        Schema::create('jobs', function ( $table) {
+        Schema::create('failed_jobs', function ( $table) {
             $table->bigIncrements('id');
-            $table->string('queue');
+            $table->text('connection');
+            $table->text('queue');
             $table->longText('payload');
-            $table->tinyInteger('attempts')->unsigned();
-            $table->unsignedInteger('reserved_at')->nullable();
-            $table->unsignedInteger('available_at');
-            $table->unsignedInteger('created_at');
-
-            $table->index(['queue', 'reserved_at']);
+            $table->longText('exception');
+            $table->timestamp('failed_at')->useCurrent();
         });
     }
 
@@ -33,6 +30,6 @@ class CreateJobsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('jobs');
+        Schema::drop('failed_jobs');
     }
 }
