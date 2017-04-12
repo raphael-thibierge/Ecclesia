@@ -5,10 +5,18 @@
 
         <div class="row">
             <div class="col-xs-12">
+                <div class="page-header">
+                    <h1>Dossier législatif</h1>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12">
                 <div class="jumbotron">
-                    <h1>
+                    <h2>
                         {{ ucfirst($folder->title) }}
-                    </h1>
+                    </h2>
                     <p><a href="{{ $folder->url }}">Voir sur le site du sénat</a></p>
                     <p>Procédure parlementaire :  {{ $folder->parliamentaryProcedureTitle }}</p>
                 </div>
@@ -24,27 +32,27 @@
         <div class="row">
             <div class="col-xs-12">
 
-                @forelse($folder->acts as $act)
+                <div class="list-group">
+                    @forelse($folder->acts as $act)
 
-                    @if ($loop->first)
-                        <div class="list-group">
-                    @endif
-
-                    <div class="list-group-item">
-                        <h4 class="list-group-item-heading">{{ $act->title }}</h4>
-                        <p class="list-group-item-text">
-                            {{ $act->organ->title }}
-                        </p>
-                        @if($act->date != null)
+                        <div class="list-group-item">
+                            <h4 class="list-group-item-heading">{{ $act->title }}</h4>
                             <p class="list-group-item-text">
-                                {{ $act->date->format('d-m-Y') }}
+                                {{ $act->organ->title }}
                             </p>
-                        @endif
-                    </div>
+                            @if($act->date != null)
+                                <p class="list-group-item-text">
+                                    {{ $act->date->format('d-m-Y') }}
+                                </p>
+                            @endif
+                        </div>
 
-                @empty
-
-                @endforelse
+                    @empty
+                        <div class="list-group-item list-group-item-danger">
+                            Pas d'acte parlementaire
+                        </div>
+                    @endforelse
+                </div>
             </div>
         </div>
 

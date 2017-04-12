@@ -67,7 +67,7 @@ class ImportLegislativeFoldersJob implements ShouldQueue
         }
 
         echo PHP_EOL . '$legislativeFolder' . PHP_EOL;
-        
+
 
         $legislativeFolder = $xml->dossiersLegislatifs;
 

@@ -21,27 +21,6 @@ class LegislativeFolderController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
      * Display the specified resource.
      *
      * @param  \App\LegislativeFolder  $legislativeFolder
@@ -52,39 +31,5 @@ class LegislativeFolderController extends Controller
         return view('legislativeFolder.show', [
             'folder'    => $legislativeFolder
         ]);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\LegislativeFolder  $legislativeFolder
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(LegislativeFolder $legislativeFolder)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\LegislativeFolder  $legislativeFolder
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, LegislativeFolder $legislativeFolder)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\LegislativeFolder  $legislativeFolder
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(LegislativeFolder $legislativeFolder)
-    {
-        //
     }
 }

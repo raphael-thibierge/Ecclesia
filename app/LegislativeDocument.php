@@ -28,6 +28,12 @@ class LegislativeDocument extends Model
         'author_organ_uids',
     ];
 
+    protected $dates = [
+        'creation_date',
+        'deposit_date',
+        'publish_date',
+    ];
+
 
     public function author_actors(){
         return $this->belongsToMany('App\Actor', null, 'author_actor_uids', 'legislative_documents_uids');

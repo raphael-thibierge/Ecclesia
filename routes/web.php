@@ -36,6 +36,10 @@ Route::resource('legislativeFolder', 'LegislativeFolderController', ['only' => [
     'show', 'index',
 ]]);
 
+Route::resource('legislativeDocument', 'LegislativeDocumentController', ['only' => [
+    'show', 'index',
+]]);
+
 
 Auth::routes();
 
