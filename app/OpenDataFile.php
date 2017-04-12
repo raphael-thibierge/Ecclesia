@@ -4,6 +4,7 @@ namespace App;
 
 
 use App\Jobs\ImportActorsAndMandatesJob;
+use App\Jobs\ImportAmendmentJob;
 use App\Jobs\ImportLegislativeFoldersJob;
 use App\Jobs\ImportVotesJob;
 use Chumper\Zipper\Facades\Zipper;
@@ -86,6 +87,7 @@ class OpenDataFile extends MongoModel
             'ImportActorsAndMandatesJob'    => ImportActorsAndMandatesJob::class,
             'ImportVotesJob'                => ImportVotesJob::class,
             'ImportLegislativeFoldersJob'   => ImportLegislativeFoldersJob::class,
+            'ImportAmendmentJob'            => ImportAmendmentJob::class,
         ]);
     }
 
