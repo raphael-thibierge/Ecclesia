@@ -44,10 +44,10 @@ class ImportAmendmentJob implements ShouldQueue
 
         $file = OpenDataFile::find($this->openDataFileId);
 
-        //$file->download();
-        //$file->unzip();
+        $file->download();
+        $file->unzip();
 
-        //$file->update();
+        $file->update();
 
 
         // Convenience method for creating a file streamer with the default parser
