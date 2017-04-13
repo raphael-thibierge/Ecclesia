@@ -13,6 +13,7 @@ class CreateMandateTable extends Migration
      */
     public function up()
     {
+        $this->down();
         Schema::create('mandates', function ( $table) {
             $table->string('uid');
             $table->primary('uid');

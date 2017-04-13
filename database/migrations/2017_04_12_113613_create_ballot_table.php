@@ -13,6 +13,7 @@ class CreateBallotTable extends Migration
      */
     public function up()
     {
+        $this->down();
         Schema::create('ballots', function ($table){
             $table->timestamps();
         });

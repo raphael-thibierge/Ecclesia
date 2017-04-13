@@ -13,6 +13,7 @@ class CreateJobsTable extends Migration
      */
     public function up()
     {
+        $this->down();
         Schema::create('jobs', function ( $table) {
             $table->bigIncrements('id');
             $table->string('queue');
