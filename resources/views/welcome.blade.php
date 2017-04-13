@@ -36,7 +36,7 @@
                         <div class="form-group">
                             <div class="col-xs-12">
                                 <a href="{{ route('legislativeDocument.index') }}" class="col-xs-12 btn btn-default">
-                                    Liste dossiers législatifs
+                                    Liste des documents législatifs
                                 </a>
                             </div>
                         </div>
@@ -45,7 +45,7 @@
                         <div class="form-group">
                             <div class="col-xs-12">
                                 <a href="{{ route('legislativeFolder.index') }}" class="col-xs-12 btn btn-default">
-                                    Liste dossiers législatifs
+                                    Liste des dossiers législatifs
                                 </a>
                             </div>
                         </div>
