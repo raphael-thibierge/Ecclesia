@@ -13,7 +13,6 @@ class CreateActorsTable extends Migration
      */
     public function up()
     {
-        Schema::drop('actors');
         Schema::create('actors', function ( $table) {
             $table->string('uid');
             $table->primary('uid');

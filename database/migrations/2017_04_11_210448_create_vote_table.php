@@ -13,7 +13,6 @@ class CreateVoteTable extends Migration
      */
     public function up()
     {
-        $this->down();
         Schema::create('votes', function ($table){
             $table->timestamps();
         });

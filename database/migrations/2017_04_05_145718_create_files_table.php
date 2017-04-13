@@ -13,7 +13,6 @@ class CreateFilesTable extends Migration
      */
     public function up()
     {
-        $this->down();
         Schema::create('open_data_files', function ($table){
 
             $table->increments('_id');

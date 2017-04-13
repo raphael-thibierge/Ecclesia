@@ -13,7 +13,6 @@ class CreateOrganeTable extends Migration
      */
     public function up()
     {
-        $this->down();
         Schema::create('organs', function ($table){
             $table->timestamps();
         });
