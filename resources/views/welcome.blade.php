@@ -7,7 +7,7 @@
                 <div class="row">
                     <div class="jumbotron">
                         <h1 class="text-center">
-                            Bienvenue sur Ecclesia
+                            Bienvenue sur {{ env('APP_NAME') }}
                         </h1>
                     </div>
                 </div>

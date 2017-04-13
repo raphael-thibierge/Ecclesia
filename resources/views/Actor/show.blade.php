@@ -108,14 +108,14 @@
             <div class="col-xs-12">
                 <div class="list-group">
                     @forelse($actor->legislative_documents as $legislative_document)
-                        <div class="list-group-item">
+                        <a href="{{ route('legislativeDocument.show', ['legislativeDocument' => $legislative_document]) }}" class="list-group-item">
                             <h4 class="list-group-item-heading">
                                 {{  ucfirst($legislative_document->title) }}
                             </h4>
                             @if ($legislative_document->adoptionStatus != null)
                                 <p class="list-group-item-text">{{ ucfirst($legislative_document->adoptionStatus) }}</p>
                             @endif
-                        </div>
+                        </a>
                     @empty
                         <div class="list-group-item list-group-item-info">Pas de vote</div>
                     @endforelse
