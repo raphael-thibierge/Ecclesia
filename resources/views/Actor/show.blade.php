@@ -44,7 +44,7 @@
         <div class="row">
             <div class="col-xs-12">
                 <div class="list-group">
-                    @forelse($actor->ballots as $ballot)
+                    @forelse($actor->ballots->reverse() as $ballot)
                         <div class="list-group-item list-group-item-{{ $ballot->decision == 'pour' ? 'success' : ($ballot->decision == 'contre' ? 'danger' : 'warning')  }}">
                             {{ $ballot->vote->date->format('d-m-Y')}} : {{ $ballot->decision}} : {{ $ballot->vote->title}}
                         </div>
