@@ -43,10 +43,12 @@ class ImportLegislativeFoldersJob implements ShouldQueue
      */
     public function handle()
     {
+        echo PHP_EOL . 'ImportLegislativeFoldersJob' . PHP_EOL;
+
         $file = OpenDataFile::find($this->openDataFileId);
 
-//        $file->download();
-//        $file->unzip();
+        $file->download();
+        $file->unzip();
 
         // get xml file
         $xml = new SimpleXMLElement(storage_path($file->xmlPath()), null, true);

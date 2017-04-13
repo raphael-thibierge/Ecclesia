@@ -38,6 +38,9 @@ class ImportAmendmentJob implements ShouldQueue
      */
     public function handle()
     {
+
+        echo PHP_EOL . 'ImportAmendmentJob' . PHP_EOL;
+
         $file = OpenDataFile::find($this->openDataFileId);
 
         $file->download();

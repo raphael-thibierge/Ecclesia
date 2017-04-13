@@ -42,6 +42,8 @@ class ImportActorsAndMandatesJob implements ShouldQueue
     public function handle()
     {
 
+        echo PHP_EOL . 'ImportActorsAndMandatesJob' . PHP_EOL;
+
         $file = OpenDataFile::find($this->openDataFileId);
 
         $file->download();
@@ -49,9 +51,6 @@ class ImportActorsAndMandatesJob implements ShouldQueue
 
         // get xml file
         $xml = new SimpleXMLElement(storage_path($file->xmlPath()), null, true);
-
-
-
 
 
 

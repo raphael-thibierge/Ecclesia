@@ -40,6 +40,8 @@ class ImportVotesJob implements ShouldQueue
      */
     public function handle()
     {
+        echo PHP_EOL . 'ImportVotesJob' . PHP_EOL;
+
         $file = OpenDataFile::find($this->openDataFileId);
 
         $file->download();
