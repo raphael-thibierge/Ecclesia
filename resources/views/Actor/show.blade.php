@@ -82,7 +82,13 @@
 
                 dataTable.addRows([
                     @foreach($actor->mandates as $mandate)
-                    [ "{!! ucfirst(str_replace("\n", '', $mandate->organ->title)) !!}", "{{ ucfirst($mandate->quality) }}", new Date("{{ $mandate->start_date }}"), new Date("{{ $mandate->end_date != null ? $mandate->end_date  : \Carbon\Carbon::today()}}") ],
+                    <?php $endDate = $mandate->end_date != null ? $mandate->end_date : \Carbon\Carbon::today(); ?>
+                    [ "{!! ucfirst(str_replace("\n", '', $mandate->organ->title)) !!}",
+                        "{{ ucfirst($mandate->quality) }}",
+
+                        new Date( {{ $mandate->start_date->year }}, {{ $mandate->start_date->month }}, {{ $mandate->start_date->day }}),
+                        new Date( {{ $endDate->year }}, {{ $endDate->month }}, {{ $endDate->day }}),
+                    ],
                     @endforeach
                 ]);
 
