@@ -118,5 +118,34 @@
             </div>
         </div>
 
+        <div class="row">
+            <div class="col-xs-12">
+                <h2>Amendements</h2>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="list-group">
+                    @forelse($actor->amendments_as_author as $amendment)
+                        <a class="list-group-item" href="{{ route('amendment.show', ['amendment' => $amendment]) }}">
+                            <h4 class="list-group-item-heading">
+                                {{  ucfirst($amendment->text_fragment_pointer_title) }}
+                            </h4>
+
+                            @if($amendment->legislative_document != null)
+                            <p class="list-group-item-text">
+                                {{ ucfirst($amendment->legislative_document->title) }}
+                            </p>
+                            @endif
+                        </a>
+                    @empty
+                        <div class="list-group-item list-group-item-info">Pas d'amendements</div>
+                    @endforelse
+
+                </div>
+            </div>
+        </div>
+
     </div>
 @endsection

@@ -42,4 +42,11 @@ class Actor extends Eloquent
         return $this->belongsToMany('App\LegislativeDocument', null, 'legislative_documents_uids', 'author_actor_uids' );
     }
 
+    public function amendments_as_author(){
+        return $this->hasMany('App\Amendment', 'author_uid', 'uid');
+    }
+
+    public function amendments_as_co_author(){
+        return $this->hasMany('App\Amendment', 'co_author_uid', 'uid');
+    }
 }

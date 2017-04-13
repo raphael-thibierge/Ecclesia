@@ -7,6 +7,8 @@
  */
 namespace App\Services;
 
+use Carbon\Carbon;
+
 class Utils {
 
     static public function formatString($element){
@@ -16,6 +18,14 @@ class Utils {
         }
         $string = $element->__toString();
         return $string != null ? $string : null;
+    }
+
+    static public function formatDate($element){
+        $date = Utils::formatString($element);
+        if ($date != null){
+            $date = new Carbon($date);
+        }
+        return $date;
     }
 
 }

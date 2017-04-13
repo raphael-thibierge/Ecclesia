@@ -40,6 +40,10 @@ Route::resource('legislativeDocument', 'LegislativeDocumentController', ['only' 
     'show', 'index',
 ]]);
 
+Route::resource('amendment', 'AmendmentController', ['only' => [
+    'show',
+]]);
+
 
 Auth::routes();
 

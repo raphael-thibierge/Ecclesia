@@ -43,6 +43,10 @@ class LegislativeDocument extends Model
         return $this->belongsToMany('App\Actor', null, 'author_organ_uids', 'legislative_documents_uids');
     }
 
+    public function amendments(){
+        return $this->hasMany('App\Amendment');
+    }
+
 
 
 }

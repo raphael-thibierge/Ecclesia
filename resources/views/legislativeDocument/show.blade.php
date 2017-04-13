@@ -92,6 +92,38 @@
             </div>
         </div>
 
+        <div class="row">
+            <div class="col-xs-12">
+                <h2>Amendements</h2>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12">
+
+                <div class="list-group">
+                    @forelse($document->amendments as $amendment)
+
+                        <a href="{{ route('amendment.show', ['amendment' => $amendment]) }}" class="list-group-item list-group-item-{{ $amendment->decision == "Adopté" ? 'success' : 'danger' }}">
+                            <h4 class="list-group-item-heading">
+                                <strong>
+                                    {{ ucfirst($amendment->text_fragment_pointer_title)}}
+                                </strong>
+                            </h4>
+                            <div class="list-group-item-text">
+                                {!! $amendment->content !!}
+                            </div>
+                        </a>
+
+                    @empty
+                        <div class="list-group-item">
+                            Pas d'amendement...
+                        </div>
+                    @endforelse
+                </div>
+            </div>
+        </div>
+
 
 
     </div>

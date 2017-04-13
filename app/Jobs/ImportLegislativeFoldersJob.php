@@ -111,7 +111,7 @@ class ImportLegislativeFoldersJob implements ShouldQueue
                     'actCode' => Utils::formatString($legislativesAct->codeActe),
                     'title' => Utils::formatString($legislativesAct->libelleActe->libelleCourt),
                     'organ_uid' => Utils::formatString($legislativesAct->organeRef),
-                    'date' => self::formatDate($legislativesAct->date),
+                    'date' => Utils::formatDate($legislativesAct->date),
                 ];
 
                 $this->updateOrCreateLegislativeAct($attributes);
@@ -153,9 +153,9 @@ class ImportLegislativeFoldersJob implements ShouldQueue
             'classificationUnderTypeCode'   => Utils::formatString($document->classification->sousType->code),
             'classificationUnderTypeTitle'   => Utils::formatString($document->classification->sousType->libelle),
             'adoptionStatus'   => Utils::formatString($document->classification->statutAdoption),
-            'creation_date'   => self::formatDate($document->cycleDeVie->chrono->dateCreation),
-            'deposit_date'   => self::formatDate($document->cycleDeVie->chrono->dateDepot),
-            'publish_date'   => self::formatDate($document->cycleDeVie->chrono->datePublication),
+            'creation_date'   => Utils::formatDate($document->cycleDeVie->chrono->dateCreation),
+            'deposit_date'   => Utils::formatDate($document->cycleDeVie->chrono->dateDepot),
+            'publish_date'   => Utils::formatDate($document->cycleDeVie->chrono->datePublication),
         ];
     }
 
@@ -178,14 +178,6 @@ class ImportLegislativeFoldersJob implements ShouldQueue
         $document->save();
 
 
-    }
-
-    static function formatDate($element){
-        $date = Utils::formatString($element);
-        if ($date != null){
-            $date = new Carbon($date);
-        }
-        return $date;
     }
 
     private function updateOrCreateLegislativeDocument(array $attributes) : LegislativeDocument
