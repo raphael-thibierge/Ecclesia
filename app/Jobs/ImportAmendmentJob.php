@@ -10,6 +10,7 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
+use Prewk\XmlStringStreamer;
 use SimpleXMLElement;
 
 class ImportAmendmentJob implements ShouldQueue
@@ -43,20 +44,33 @@ class ImportAmendmentJob implements ShouldQueue
 
         $file = OpenDataFile::find($this->openDataFileId);
 
-        $file->download();
-        $file->unzip();
+        //$file->download();
+        //$file->unzip();
 
-        $file->update();
-        echo PHP_EOL . 'xml downloaded' . PHP_EOL;
+        //$file->update();
 
-        // get xml file
-        $xmlData = new SimpleXMLElement(storage_path($file->xmlPath()), null, true);
-        echo PHP_EOL . 'xml loaded' . PHP_EOL;
-        var_dump($xmlData);
-        echo PHP_EOL;
+
+        // Convenience method for creating a file streamer with the default parser
+        $streamer = XmlStringStreamer::createStringWalkerParser(storage_path($file->xmlPath()));
+
+
+        while ($node = $streamer->getNode()) {
+            // $node will be a string like this: "<customer><firstName>Jane</firstName><lastName>Doe</lastName></customer>"
+            $simpleXmlNode = simplexml_load_string($node);
+
+            $textXML = $simpleXmlNode;
+
+
+//        echo PHP_EOL . 'xml downloaded' . PHP_EOL;
+//
+//        // get xml file
+//        $xmlData = new SimpleXMLElement(storage_path($file->xmlPath()), null, true);
+//        echo PHP_EOL . 'xml loaded' . PHP_EOL;
+//        var_dump($xmlData);
+//        echo PHP_EOL;
 
         // foreach vote
-        foreach ($xmlData as $textXML) {
+        //foreach ($xmlData as $textXML) {
 
 
             $legislative_document_uid = Utils::formatString($textXML->refTexteLegislatif);

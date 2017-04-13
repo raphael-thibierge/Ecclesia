@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "b8fb50ce6a6fcd2a7168722f4af85f59",
-    "content-hash": "12d986b11cc0ff8d16bf16b7e8c05f99",
+    "hash": "03fb5d9b9fc2130283a56ca58abc00ba",
+    "content-hash": "789bd869c8fa501e1c6748c2f0b69444",
     "packages": [
         {
             "name": "anahkiasen/underscore-php",
@@ -1164,6 +1164,47 @@
                 "utf8"
             ],
             "time": "2016-05-18 13:57:10"
+        },
+        {
+            "name": "prewk/xml-string-streamer",
+            "version": "0.9.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/prewk/xml-string-streamer.git",
+                "reference": "d6609f6b48402d65b2926aff050eced979e45641"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/prewk/xml-string-streamer/zipball/d6609f6b48402d65b2926aff050eced979e45641",
+                "reference": "d6609f6b48402d65b2926aff050eced979e45641",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "0.8.0",
+                "prewk/xml-faker": "0.0.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Prewk\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "prewk",
+                    "email": "oskar.thornblad@gmail.com"
+                }
+            ],
+            "description": "Stream large XML files with low memory consumption",
+            "homepage": "https://github.com/prewk/xml-string-streamer",
+            "time": "2017-03-23 20:54:43"
         },
         {
             "name": "psr/log",
